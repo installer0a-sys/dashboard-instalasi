@@ -24,13 +24,22 @@
     <iframe src="https://script.google.com/macros/s/AKfycbylHQfUu2Nvg9kijsdKHuRG_yMA2XirNBkX75EoxH5WQwg88XAvopsd8yPOvk_B0JyaXQ/exec"></iframe>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('PWA Siap!'))
-                    .catch(err => console.error('Gagal:', err));
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js').then(reg => {
+                // Memeriksa jika ada update berkala
+                reg.addEventListener('updatefound', () => {
+                    const newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // Otomatis muat ulang halaman saat update selesai didownload
+                            window.location.reload();
+                        }
+                    });
+                });
             });
-        }
-    </script>
+        });
+    }
+</script>
 </body>
 </html>
