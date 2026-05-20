@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dashboard Instalasi</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a73e8">
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; overflow: hidden;
+            background-color: #ffffff;
+        }
+        iframe {
+            width: 100%; height: 100%;
+            border: none; margin: 0; padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GANTI DENGAN LINK WEB APP APPS SCRIPT ANDA YANG BARU -->
+    <iframe src="https://script.google.com/macros/s/AKfycbxsUkkeiUqT_y0rThbKMgQySsbBuYr0-NCflNlxFHbl_gIXjxZwhFzlvkPTAPKWX_skpg/exec"></iframe>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('PWA Siap!'))
+                    .catch(err => console.error('Gagal:', err));
+            });
+        }
+    </script>
+</body>
+</html>
